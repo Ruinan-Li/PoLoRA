@@ -111,9 +111,9 @@ head_entity relation tail_entity
 #### PER (Priority Experience Replay) Settings
 - `-per_enable`: Enable PER (default: `True`)
 - `-per_replay_ratio`: Replay ratio (auto-computed if not specified)
-- `-per_alpha`: Loss exponent (default: `1`)
-- `-per_gamma`: Structural importance exponent (default: `0`)
-- `-per_beta`: IS weight exponent (default: `0`)
+- `-per_alpha`: Loss exponent (default: `0.5`)
+- `-per_gamma`: Structural importance exponent (default: `0.5`)
+- `-per_beta`: IS weight exponent (default: `0.5`)
 
 #### Other Settings
 - `-train_new`: Train on new facts only (default: `True`)
