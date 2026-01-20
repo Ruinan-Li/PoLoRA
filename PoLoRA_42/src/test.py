@@ -9,7 +9,7 @@ class Tester():
         self.kg = kg
         self.model = model
         self.poincare_trainer = getattr(self.model, "poincare_trainer", None)
-        # Only use MuRP path when current training snapshot is 0 and evaluation target is 0
+        
         self.use_snapshot0_trainer = (
             int(self.args.snapshot) == 0 and int(self.args.snapshot_test) == 0
         )
