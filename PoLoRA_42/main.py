@@ -273,7 +273,7 @@ class Instructor():
         else:
             epoch_num = int(getattr(self.args, "epoch_num_snapshot1plus", 200))
         
-        # If old epoch_num parameter is set and not equal to default 100, use it preferentially (backward compatibility)
+        
         if hasattr(self.args, "epoch_num") and int(self.args.epoch_num) != 100:
             epoch_num = int(self.args.epoch_num)
         
@@ -351,9 +351,6 @@ class Instructor():
                 )
                 shutil.copyfile(out_tar, best_path)
         else:
-            # Snapshot 1 and later: save Riemannian embeddings and LoRA parameters
-            # Save complete embeddings after training, not old poincare_ent_embeddings
-            # This ensures next snapshot can correctly inherit trained embeddings
             with torch.no_grad():
                 ent_emb, rel_emb = self.model.get_full_poincare_embeddings()
                 # Update model's poincare_ent_embeddings to complete embeddings after training
@@ -361,8 +358,8 @@ class Instructor():
                 self.model.poincare_rel_embeddings = rel_emb.detach().clone()
             
             checkpoint_dict = {
-                'state_dict': self.model.state_dict(),  # Contains LoRA parameters and MuRP scorer parameters
-                'poincare_ent_embeddings': self.model.poincare_ent_embeddings,  # Now complete embeddings after training
+                'state_dict': self.model.state_dict(),  
+                'poincare_ent_embeddings': self.model.poincare_ent_embeddings,  
                 'poincare_rel_embeddings': self.model.poincare_rel_embeddings,
                 'lora_state': self.model.get_lora_state() if hasattr(self.model, "get_lora_state") else None,
                 'epoch_id': self.args.epoch,
