@@ -62,7 +62,7 @@ parser.add_argument("-per_beta", dest="per_beta", default=0.5, help="PER: IS wei
 
 args = parser.parse_args()
 
-# Auto-compute per_replay_ratio if not specified
+# Auto-compute per_replay_ratio 
 if args.per_replay_ratio is None and args.per_enable:
     try:
         from replay.adaptive_replay_ratio import get_adaptive_replay_ratio
@@ -77,4 +77,4 @@ if args.per_replay_ratio is None and args.per_enable:
         print(f"[Warning] Failed to compute adaptive replay ratio: {e}, using default 0.2")
         args.per_replay_ratio = 0.2
 elif args.per_replay_ratio is None:
-    args.per_replay_ratio = 0.2  
+    args.per_replay_ratio = 1.5  
